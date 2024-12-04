@@ -46,23 +46,33 @@
 
 <!-- Sección de Noticias Destacadas -->
 <div class="container mx-auto p-4">
-    <div class="grid grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
         <!-- Sección Principal: Noticias -->
-        <div class="col-span-3">
+        <div class="lg:col-span-3">
             <div id="noticias-container" class="grid grid-cols-1 gap-4">
                 @foreach ($ultimasNoticias->chunk(5) as $pageIndex => $noticiasChunk)
                     <div class="noticia-pagina {{ $pageIndex === 0 ? 'block' : 'hidden' }}">
                         @foreach ($noticiasChunk as $noticia)
-                            <div class="w-3/4 mx-auto">
-                                <div class="card sm:card-side">
-                                    <figure>
-                                        <img src="img/{{ $noticia->image }}" alt="news-image" class="w-full  object-cover rounded-t-lg" />
+                            <div class="mx-auto">
+                                <div class="card flex flex-col sm:flex-row bg-white shadow-lg rounded-lg overflow-hidden">
+                                    <!-- Imagen -->
+                                    <figure class="w-full sm:w-1/3">
+                                        <img 
+                                            src="img/{{ $noticia->image }}" 
+                                            alt="news-image" 
+                                            class="w-full h-48 sm:h-full object-cover"
+                                        />
                                     </figure>
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-2.5">{{ $noticia->titular }}</h5>
-                                        <p class="mb-3">{{ Str::limit($noticia->contenido, 100) }}</p>
-                                        <div class="card-actions">
-                                            <a href="{{ route('news.show', $noticia->idnoticias) }}" class="btn btn-primary">Leer más</a>
+                                    <!-- Contenido -->
+                                    <div class="card-body p-6 flex flex-col justify-between sm:w-2/3">
+                                        <h5 class="card-title text-xl font-semibold mb-2">{{ $noticia->titular }}</h5>
+                                        <p class="text-gray-600 mb-3">{{ Str::limit($noticia->contenido, 100) }}</p>
+                                        <div class="card-actions mt-4">
+                                            <a 
+                                                href="{{ route('news.show', $noticia->idnoticias) }}" 
+                                                class="btn bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                                                Leer más
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -75,8 +85,9 @@
             <!-- Navegación -->
             <div class="mt-6 flex justify-center space-x-2">
                 @foreach ($ultimasNoticias->chunk(5) as $pageIndex => $noticiasChunk)
-                    <button class="pagination-btn btn {{ $pageIndex === 0 ? 'btn-primary' : 'btn-secondary' }}" 
-                            data-page="{{ $pageIndex }}">
+                    <button 
+                        class="pagination-btn btn {{ $pageIndex === 0 ? 'btn-primary' : 'btn-secondary' }}" 
+                        data-page="{{ $pageIndex }}">
                         {{ $pageIndex + 1 }}
                     </button>
                 @endforeach
@@ -84,18 +95,26 @@
         </div>
 
         <!-- Barra Lateral: Noticias de Facebook -->
-        <div class="col-span-1">
+        <div class="lg:col-span-1 mx-auto">
             <h5 class="text-lg font-bold mb-4">Últimas de Facebook</h5>
             @foreach ($facebookLinks as $noticiaFacebook)
-            <div class="facebook-embed">
-                {!! $noticiaFacebook->url !!}
-            </div>
-           
-            
+                <div class="facebook-embed mb-4 bg-white shadow-lg rounded-lg overflow-hidden">
+                    <iframe 
+                        src="https://www.facebook.com/plugins/post.php?href={{ urlencode($noticiaFacebook->url) }}&show_text=true&width=300" 
+                        width="100%" 
+                        height="400" 
+                        style="border:none;overflow:hidden" 
+                        scrolling="no" 
+                        frameborder="0" 
+                        allowfullscreen="true" 
+                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                    </iframe>
+                </div>
             @endforeach
         </div>
     </div>
 </div>
+
 <div>
     
 </div>
