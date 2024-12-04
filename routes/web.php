@@ -19,5 +19,5 @@ Route::get('news/{id}', [NoticiaController::class, 'show'])->name('news.show');
 Route::get('news/{id}', [NoticiaController::class, 'show'])->name('news.show');
 
 
-
+//vale 
 Route::get('/admin', [AdminPanelController::class, 'index'])->name('admin.index');
