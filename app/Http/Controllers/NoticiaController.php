@@ -11,7 +11,8 @@ class NoticiaController extends Controller
     public function index()
     {
         $noticias = Noticia::with('user')->get();
-        return view('noticias.index', compact('noticias'));
+        
+        return view('news.noticias', compact('noticias'));
     }
 
     public function create()
