@@ -14,7 +14,8 @@
         <br>
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Formulario 1: Añadir Noticia -->
-            <form action="" method="POST" enctype="multipart/form-data" class="p-6 bg-white shadow-md rounded-lg">
+            <form action="{{ route('noticias.store') }}" method="POST" enctype="multipart/form-data"
+                class="p-6 bg-white shadow-md rounded-lg">
                 @csrf
                 <h2 class="text-2xl font-bold mb-6 text-gray-800">Añadir Noticia</h2>
 
@@ -60,7 +61,8 @@
             </form>
 
             <!-- Formulario 2: Añadir Videos Redes Sociales -->
-            <form action="" method="POST" enctype="multipart/form-data" class="p-6 bg-white shadow-md rounded-lg">
+            <form action="{{ route('redes_videos.store') }}" method="POST" enctype="multipart/form-data"
+                class="p-6 bg-white shadow-md rounded-lg">
                 @csrf
                 <h2 class="text-2xl font-bold mb-6 text-gray-800">Añadir Videos Redes Sociales</h2>
 
